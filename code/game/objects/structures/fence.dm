@@ -18,6 +18,7 @@
 
 	icon = 'icons/obj/fence.dmi'
 	icon_state = "straight"
+	minimap_color = MINIMAP_FENCE
 
 	var/cuttable = TRUE
 	var/hole_size= NO_HOLE

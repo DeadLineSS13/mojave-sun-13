@@ -24,6 +24,7 @@
 	var/initial_gas_mix = OPENTURF_DEFAULT_ATMOS
 
 /turf/open
+	minimap_color = MINIMAP_AREA_COLONY
 	//used for spacewind
 	///Pressure difference between two turfs
 	var/pressure_difference = 0

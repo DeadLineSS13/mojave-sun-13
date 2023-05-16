@@ -162,6 +162,9 @@
 
 	var/hitted_sound //MOJAVE SUN EDIT - Hit Sounds, Why the devilshit isnt this a base feature, what goober decided every objects hit sound should be dictated by one fwuarging ogg
 
+	///The color this atom will be if we choose to draw it on the minimap
+	var/minimap_color = MINIMAP_SOLID
+
 /**
  * Called when an atom is created in byond (built in engine proc)
  *

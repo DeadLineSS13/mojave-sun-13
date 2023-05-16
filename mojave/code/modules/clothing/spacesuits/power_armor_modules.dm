@@ -26,4 +26,6 @@
 /obj/item/pa_module/minimap
 	name = "Circuit board minimap"
 	zone = BODY_ZONE_HEAD
-
+	actions_modules = list(
+		/datum/action/minimap,
+	)
