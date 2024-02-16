@@ -1,8 +1,9 @@
 BEHAVIOR_DEFINE_AND_SET_GLOBAL(behavior, null)
 
 /datum/behavior_api
-    var/datum/behavior_api_version/version
+	var/datum/behavior_api_version/version
 	var/datum/behavior_event_handler/event_handler
+
 
 /datum/behavior_api/New(datum/behavior_event_handler/event_handler, datum/behavior_api_version/version)
 	. = ..()

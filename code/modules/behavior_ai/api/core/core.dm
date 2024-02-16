@@ -1,25 +1,12 @@
 /world/BehaviorNew(datum/behavior_event_handler/event_handler)
-    var/current_api = BEHAVIOR_READ_GLOBAL(behavior)
+	var/current_api = BEHAVIOR_READ_GLOBAL(behavior)
 	if(current_api)
-		BEHAVIOR_ERROR_LOG("API datum already set (\ref[current_api] ([current_api]))! Was TgsNew() called more than once?")
-		return
-
-	var/raw_parameter = world.params[BEHAVIOR_VERSION_PARAMETER]
-	if(!raw_parameter)
-		return
-
-	var/datum/behavior_api_version/version = new(raw_parameter)
-	if(!version.Valid(FALSE))
-		BEHAVIOR_ERROR_LOG("Failed to validate BEHAVIOR API version parameter: [raw_parameter]!")
+		BEHAVIOR_ERROR_LOG("API datum already set (\ref[current_api] ([current_api]))! Was BehaviorNew() called more than once?")
 		return
 
 	var/api_datum = /datum/behavior_api/v0
 
-	if(!api_datum)
-		BEHAVIOR_ERROR_LOG("Found unsupported Interop API version: [raw_parameter]. If this is a valid version please report this, backporting is done on demand.")
-		return
-
-	BEHAVIOR_INFO_LOG("Activating API for version [version.deprefixed_parameter]")
+	BEHAVIOR_INFO_LOG("Activating API for version 0")
 
 	if(event_handler && !istype(event_handler))
 		BEHAVIOR_ERROR_LOG("Invalid parameter for event_handler: [event_handler]")
@@ -29,7 +16,7 @@
 
 	BEHAVIOR_WRITE_GLOBAL(behavior, new_api)
 
-	var/result = new_api.OnWorldNew(minimum_required_security_level)
+	var/result = new_api.OnWorldNew()
 	if(!result || result == BEHAVIOR_UNIMPLEMENTED)
 		BEHAVIOR_WRITE_GLOBAL(behavior, null)
 		BEHAVIOR_ERROR_LOG("Failed to activate API!")
@@ -41,12 +28,12 @@
 	return new /datum/behavior_api_version("0.0.1")
 
 /world/BehaviorInitializationComplete()
-	var/datum/behavior_api/api = BEHAVIOR_READ_GLOBAL(ai)
+	var/datum/behavior_api/api = BEHAVIOR_READ_GLOBAL(behavior)
 	if(api)
 		api.OnInitializationComplete()
 
 /world/proc/BehaviorTopic(T)
-    var/datum/behavior_api/api = BEHAVIOR_READ_GLOBAL(ai)
+	var/datum/behavior_api/api = BEHAVIOR_READ_GLOBAL(behavior)
 	if(api)
 		var/result = api.OnTopic(T)
 		if(result != BEHAVIOR_UNIMPLEMENTED)

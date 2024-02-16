@@ -1,7 +1,6 @@
 /datum/behavior_api/v0
+	var/initialized = FALSE
 
-/datum/behavior_api/v0/New()
-    . = ..()
-    interop_version = version
-	BEHAVIOR_DEBUG_LOG("V0 API created: [json_encode(args)]")
-
+/datum/behavior_api/OnWorldNew()
+	initialized = TRUE
+	return TRUE

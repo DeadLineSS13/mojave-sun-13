@@ -31,9 +31,6 @@
 /// Write an error `message` to a server log.
 #define BEHAVIOR_ERROR_LOG(message)
 
-/// Get the number of connected /clients.
-#define BEHAVIOR_CLIENT_COUNT
-
 #endif
 
 /// Before a reboot mode change, extras parameters are the current and new reboot mode enums.
@@ -66,7 +63,7 @@
 	return
 
 /// Put this at the start of [/world/proc/Topic].
-#define BEHAVIOR_TOPIC var/ai_topic_return = BehaviorTopic(args[1]); if(ai_topic_return) return ai_topic_return
+#define BEHAVIOR_TOPIC var/behavior_topic_return = BehaviorTopic(args[1]); if(behavior_topic_return) return behavior_topic_return
 
 /**
  * Call this as late as possible in [world/proc/Reboot] (BEFORE ..()).
@@ -93,6 +90,19 @@
 	/// String value minus prefix.
 	var/deprefixed_parameter
 
+/**
+ * Returns [TRUE]/[FALSE] based on if the [/datum/behavior_api_version] contains wildcards.
+ */
+/datum/behavior_api_version/proc/Wildcard()
+	return
+
+/**
+ * Returns [TRUE]/[FALSE] based on if the [/datum/behavior_api_version] equals some other version.
+ *
+ * other_version - The [/datum/behavior_api_version] to compare against.
+ */
+/datum/behavior_api_version/proc/Equals(datum/behavior_api_version/other_version)
+	return
 
 /// User definable handler for AI events.
 /datum/behavior_event_handler
@@ -132,4 +142,10 @@
  * If AI has not requested a [BEHAVIOR_REBOOT_MODE_SHUTDOWN] DreamDaemon will be launched again.
  */
 /world/proc/BehaviorEndProcess()
+	return
+
+/world/proc/BehaviorVersion()
+	return
+
+/world/proc/BehaviorApiVersion()
 	return

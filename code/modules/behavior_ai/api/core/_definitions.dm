@@ -3,7 +3,3 @@
 #endif
 
 #define BEHAVIOR_UNIMPLEMENTED "___unimplemented"
-
-#ifndef BEHAVIOR_DEBUG_LOG
-#define BEHAVIOR_DEBUG_LOG(message)
-#endif
